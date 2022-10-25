@@ -8,7 +8,7 @@ ARG http_port=8080
 ARG https_port=10443
 
 # Install beego & bee
-RUN go get github.com/astaxie/beego
+RUN go get github.com/beego/beego/v2/server/web
 RUN go get github.com/beego/bee
 
 # Expose port to public
