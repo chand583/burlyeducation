@@ -44,7 +44,7 @@
 
 ## Test
 
-```http://localhost:8080/einfo/v1/article```
+```http://localhost:8080/burlyed/v1/question```
 
 #SET server time zone in UTC format
 
@@ -74,7 +74,7 @@ if you are getting conf/app.conf not found error copy conf/app.conf folder in te
 if you want to run single test function run this command 
 
 ```
-go test -v -run=TestArticleGetAll #replace TestArticleGetAll with our function name
+go test -v -run=TestQuestionGetAll #replace TestQuestionGetAll with our function name
 
 ```
 
