@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	beego "github.com/beego/beego/v2/server/web"
+	"github.com/astaxie/beego"
 )
 
 type MainController struct {
@@ -9,7 +9,7 @@ type MainController struct {
 }
 
 func (c *MainController) Get() {
-	c.Data["Website"] = "burlyeducation.com"
-	c.Data["Email"] = "chand583@gmail.com"
+	c.Data["Website"] = "beego.me"
+	c.Data["Email"] = "astaxie@gmail.com"
 	c.TplName = "index.tpl"
 }

@@ -5,7 +5,7 @@ type ErrorController struct {
 }
 
 func (c *ErrorController) Error404() {
-    c.ResponseWithError(404,"Page not found")
+    c.ResponseWithError(404,"Page not found1")
 }
 
 func (c *ErrorController) Error500() {
