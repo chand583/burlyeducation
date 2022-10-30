@@ -29,8 +29,8 @@ type RedisConfig struct {
 	RedisEndpoint string `json:"Redis_endpoint"`
 }
 
-type TllmsConfig struct {
-	TllmsSecret string `json:"TLLMS-API-KEY"`
+type SrvConfig struct {
+	ApiSecret string `json:"API-KEY"`
 }
 
 func (aws AWSSecretManager) GetDBConString() (string, error) {
@@ -69,19 +69,19 @@ func (aws AWSSecretManager) GetRedisConString() (string, error) {
 	return redisConString, nil
 }
 
-func (aws AWSSecretManager) GetTllmsApiSecret() (string, error) {
+func (aws AWSSecretManager) GetApiSecret() (string, error) {
 
-	secretIdTllms, _ := config.String("aws::secret_id_tllms")
+	secretId, _ := config.String("aws::secret_id")
 
-	tllmsAPiSecret, err := getSecretFromAWS(secretIdTllms)
+	ApiSecret, err := getSecretFromAWS(secretId)
 
 	if err != nil {
 		return "", err
 	}
 
-	tllmsConfig := TllmsConfig{}
-	json.Unmarshal([]byte(tllmsAPiSecret), &tllmsConfig)
-	return tllmsConfig.TllmsSecret, nil
+	srvConfig := SrvConfig{}
+	json.Unmarshal([]byte(ApiSecret), &srvConfig)
+	return srvConfig.ApiSecret, nil
 }
 
 func getSecretFromAWS(secretName string) (string, error) {

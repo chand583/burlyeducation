@@ -45,9 +45,7 @@ func (auth Auth) IsAuthorized() (bool, string) {
 
 	secretManager, _ := config.String("SECRET_MANAGER")
 	if secretManager == "aws" {
-		secretTllms, err := AWSSecretManager{}.GetTllmsApiSecret()
-		secret = secretTllms
-
+		secret, err := AWSSecretManager{}.GetApiSecret()
 		if err != nil {
 			log.Warning(1104, map[string]interface{}{"error_details": err})
 			return false, "Token, Invalid auth"
