@@ -14,6 +14,7 @@ COPY . .
 RUN ln -s app-local.conf  conf/app.conf
 RUN go mod tidy
 RUN go get -u github.com/beego/bee
+RUN go install github.com/beego/bee
 CMD ["bee", "run"]
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
