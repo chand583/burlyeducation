@@ -34,7 +34,7 @@ func init() {
 	ns :=
     beego.NewNamespace("burlyed/v1",
         beego.NSRouter("/user", &v1.UserController{}),
-		beego.NSRouter("/user/{id}", &v1.UserController{}),
+		beego.NSRouter("/user/:id", &v1.UserController{}),
        // beego.NSRouter("/scheduler/weather",&controllers.ScheduleController{}),
 
     )
