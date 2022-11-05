@@ -10,6 +10,7 @@ import (
 )
 
 func init() {
+	//admin.Run()
 	beego.Router("/", &controllers.MainController{})
 
 	// authUrls := []string{"/backend-abcast/v1/article/create"}
@@ -30,14 +31,13 @@ func init() {
 	// beego.AddNamespace(ns)
 	//beego.Router("/backend-abcast/v1/article/create", &v1.ExamInfoController{})
 
-
 	ns :=
-    beego.NewNamespace("burlyed/v1",
-        beego.NSRouter("/user", &v1.UserController{}),
-		beego.NSRouter("/user/:id([0-9])+", &v1.UserController{}),
-       // beego.NSRouter("/scheduler/weather",&controllers.ScheduleController{}),
+		beego.NewNamespace("burlyed/v1",
+			beego.NSRouter("/user", &v1.UserController{}),
+			beego.NSRouter("/user/:id([0-9])+", &v1.UserController{}, "GET:GetOne"),
+			// beego.NSRouter("/scheduler/weather",&controllers.ScheduleController{}),
 
-    )
-beego.AddNamespace(ns)
+		)
+	beego.AddNamespace(ns)
 
 }
