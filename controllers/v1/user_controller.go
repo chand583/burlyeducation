@@ -2,24 +2,27 @@ package v1
 
 import (
 	"burlyeducation/controllers"
+	"burlyeducation/models"
+	"encoding/json"
 	"fmt"
+	"strings"
 )
 
 type UserController struct {
 	controllers.AppController
 }
 
-// Url Mapping
-func (c *UserController) URLMapping() {
-	fmt.Println("mapping  "+ c.Ctx.Request.Method)
-	c.Mapping("GetOne", c.GetOne)
-	c.Mapping("Get", c.GetAll)
+// // URLMapping ...
+// func (c *UserController) URLMapping() {
+// 	c.Mapping("Post", c.Post)
+// 	c.Mapping("GetOne", c.GetOne)
+// 	c.Mapping("GetAll", c.GetAll)
+// 	//c.Mapping("Put", c.Put)
+// 	//c.Mapping("Delete", c.Delete)
+// }
 
-}
-
-// @router / [get]
 func (c *UserController) Get() {
-	
+
 	fmt.Println("in get function---")
 	responseData := make(map[string]string)
 	responseData["love1"] = "love to write api"
@@ -27,11 +30,22 @@ func (c *UserController) Get() {
 }
 
 func (c *UserController) Post() {
-	fmt.Println(c.Ctx.Input.RequestBody)
-	fmt.Println("in post function---")
-	responseData := make(map[string]string)
-	responseData["post"] = "love to post	 api"
-	c.Response(responseData, "Success")
+	var userModel models.User
+	internalApi := c.Ctx.Request.RequestURI
+	if !strings.Contains(internalApi, "burlyed") {
+		c.Ctx.ResponseWriter.WriteHeader(404)
+		c.ResponseWithError(404, "Page not found")
+		return
+	}
+	_ = json.Unmarshal(c.Ctx.Input.RequestBody, &userModel)
+	upInsrt, err := models.UserModel{}.SaveUpdateUser(&userModel, userModel.Id)
+	if err != nil {
+		c.ResponseWithError(1001, err.Error())
+	} else {
+		c.Response(upInsrt, "Record insert/update successfully")
+	}
+
+	//fmt.Println("post", err)
 }
 
 func (c *UserController) GetAll() {

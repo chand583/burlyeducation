@@ -4,9 +4,8 @@ import (
 	"burlyeducation/controllers"
 	v1 "burlyeducation/controllers/v1"
 
-	//"burlyeducation/lib"
-
 	"github.com/astaxie/beego"
+	//"github.com/beego/admin"
 )
 
 func init() {
